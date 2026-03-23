@@ -1,0 +1,16 @@
+services:
+  app:
+    build: .
+    ports:
+      - "4000:4000"
+    volumes:
+      - kanban_data:/app/data
+    environment:
+      - NODE_ENV=production
+      - DB_PATH=/app/data/kanban.db
+      - OPEN_ROUTER_API_KEY=${OPEN_ROUTER_API_KEY}
+      - JWT_SECRET=${JWT_SECRET:-kanban-secret-change-me}
+    restart: unless-stopped
+
+volumes:
+  kanban_data:
